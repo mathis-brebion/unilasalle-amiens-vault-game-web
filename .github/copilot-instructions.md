@@ -14,6 +14,7 @@
 - `src/App.tsx`: top-level UI composition.
 - `src/index.css`: global styles and Tailwind integration.
 - Preserve the Vite plugin stack in `vite.config.ts` (React + React Compiler Babel preset + Tailwind).
+- Use `react-router` for application routing and prefer route-based organization in `src/routes` or `src/pages` as the app grows.
 
 ## Build and Test
 
