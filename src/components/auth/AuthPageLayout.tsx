@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
 import { ShieldCheck } from "lucide-react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import backgroundAuth from "@/assets/background-auth.png";
 import { Card } from "@/components/ui/card";
-
-const tabClassName =
-  "flex-1 py-5 text-center font-['Space_Grotesk'] text-xs tracking-[0.2em] uppercase transition-colors hover:text-foreground";
-
-const activeTabClassName =
-  "relative text-primary after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.5 after:bg-primary after:shadow-[0_0_8px_rgb(153_247_255)]";
-
-const inactiveTabClassName = "text-muted-foreground";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const AuthPageLayout = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const activeTab = location.pathname.includes("sign-up")
     ? "sign-up"
     : "sign-in";
@@ -53,23 +48,31 @@ export const AuthPageLayout = () => {
         </header>
 
         <Card>
-          <nav
-            className="flex border-b border-[rgb(72_72_71/0.2)]"
-            aria-label="Authentication tabs"
+          <Tabs
+            value={activeTab}
+            onValueChange={(value) => {
+              navigate(`/${value}`);
+            }}
+            className="w-full gap-0"
           >
-            <Link
-              to="/sign-in"
-              className={`${tabClassName} ${activeTab === "sign-in" ? activeTabClassName : inactiveTabClassName}`}
+            <TabsList
+              variant="line"
+              className="h-auto w-full rounded-none border-b border-[rgb(72_72_71/0.2)] bg-transparent p-0"
             >
-              LOGIN
-            </Link>
-            <Link
-              to="/sign-up"
-              className={`${tabClassName} ${activeTab === "sign-up" ? activeTabClassName : inactiveTabClassName}`}
-            >
-              SIGN UP
-            </Link>
-          </nav>
+              <TabsTrigger
+                value="sign-in"
+                className="relative flex-1 rounded-none border-none py-5 font-['Space_Grotesk'] text-xs tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground data-active:text-primary data-active:after:absolute data-active:after:right-0 data-active:after:bottom-[-1px] data-active:after:left-0 data-active:after:h-0.5 data-active:after:bg-primary data-active:after:shadow-[0_0_8px_rgb(153_247_255)]"
+              >
+                LOGIN
+              </TabsTrigger>
+              <TabsTrigger
+                value="sign-up"
+                className="relative flex-1 rounded-none border-none py-5 font-['Space_Grotesk'] text-xs tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground data-active:text-primary data-active:after:absolute data-active:after:right-0 data-active:after:bottom-[-1px] data-active:after:left-0 data-active:after:h-0.5 data-active:after:bg-primary data-active:after:shadow-[0_0_8px_rgb(153_247_255)]"
+              >
+                SIGN UP
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
 
           <div
             className={`space-y-5 p-6 transition-all duration-200 ease-out motion-reduce:transition-none motion-reduce:transform-none sm:p-5 ${isContentVisible ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"}`}
@@ -87,7 +90,10 @@ export const AuthPageLayout = () => {
             <a href="#" className="transition-colors hover:text-primary">
               Terms of Service
             </a>
-            <span>|</span>
+            <Separator
+              orientation="vertical"
+              className="h-3 bg-[rgb(173_170_170/0.45)]"
+            />
             <a href="#" className="transition-colors hover:text-primary">
               Privacy Policy
             </a>

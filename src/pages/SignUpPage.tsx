@@ -1,6 +1,8 @@
 import { CircleUserRound, KeyRound, LockKeyholeOpen, Mail } from "lucide-react";
 import { AuthInputField } from "@/components/auth/AuthInputField";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 export function SignUpPage() {
   return (
@@ -48,18 +50,17 @@ export function SignUpPage() {
         }}
       />
 
-      <label className="grid grid-cols-[auto_1fr] items-start gap-2 pt-1">
-        <input
-          type="checkbox"
-          required
-          className="mt-0.5 h-4 w-4 accent-primary"
-        />
-        <span className="font-['Manrope'] text-[11px] leading-relaxed text-muted-foreground">
+      <div className="grid grid-cols-[auto_1fr] items-start gap-2 pt-1">
+        <Checkbox id="terms" required className="mt-0.5" />
+        <Label
+          htmlFor="terms"
+          className="font-['Manrope'] text-[11px] leading-relaxed text-muted-foreground"
+        >
           I ACKNOWLEDGE THE TERMS OF THE{" "}
           <em className="not-italic text-primary">VAULT GAME PROTOCOL</em> AND
           CONSENT TO DATA SYNCHRONIZATION.
-        </span>
-      </label>
+        </Label>
+      </div>
 
       <Button type="submit" size="lg" className="mt-1 w-full">
         INITIATE REGISTRATION
