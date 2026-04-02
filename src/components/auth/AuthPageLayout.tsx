@@ -1,13 +1,7 @@
-import type { ReactNode } from "react";
 import { ShieldCheck } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import backgroundAuth from "@/assets/background-auth.png";
 import { Card } from "@/components/ui/card";
-
-type AuthPageLayoutProps = {
-  activeTab: "sign-in" | "sign-up";
-  children: ReactNode;
-};
 
 const tabClassName =
   "flex-1 py-5 text-center font-['Space_Grotesk'] text-xs tracking-[0.2em] uppercase transition-colors hover:text-foreground";
@@ -17,12 +11,14 @@ const activeTabClassName =
 
 const inactiveTabClassName = "text-muted-foreground";
 
-export const AuthPageLayout: React.FC<AuthPageLayoutProps> = ({
-  activeTab,
-  children,
-}) => {
+export const AuthPageLayout = () => {
+  const location = useLocation();
+  const activeTab = location.pathname.includes("sign-up")
+    ? "sign-up"
+    : "sign-in";
+
   return (
-    <main className="auth-route-enter relative min-h-screen overflow-hidden bg-background text-foreground">
+    <main className="relative h-svh overflow-hidden bg-background text-foreground">
       <div
         className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
         aria-hidden="true"
@@ -37,8 +33,8 @@ export const AuthPageLayout: React.FC<AuthPageLayoutProps> = ({
 
       <div className="bg-linear-to-r pointer-events-none fixed top-0 left-0 z-30 h-px w-full from-transparent via-[rgb(153_247_255/0.5)] to-transparent" />
 
-      <section className="relative z-10 mx-auto flex w-full max-w-lg flex-col px-6 pt-14 pb-16 sm:px-4">
-        <header className="mb-10 text-center sm:mb-8">
+      <section className="relative z-10 mx-auto flex h-full w-full max-w-lg flex-col justify-center px-6 py-6 sm:px-4">
+        <header className="mb-6 text-center sm:mb-5">
           <h1 className="font-['Space_Grotesk'] text-3xl font-bold tracking-[0.18em] text-primary uppercase [text-shadow:0_0_10px_rgb(0_242_255/0.6)] sm:text-2xl">
             Vault Game
           </h1>
@@ -63,10 +59,12 @@ export const AuthPageLayout: React.FC<AuthPageLayoutProps> = ({
             </Link>
           </nav>
 
-          <div className="space-y-6 p-8 sm:p-5">{children}</div>
+          <div className="auth-content-enter space-y-5 p-6 sm:p-5">
+            <Outlet />
+          </div>
         </Card>
 
-        <footer className="mt-10 grid gap-3 text-center sm:mt-8">
+        <footer className="mt-6 grid gap-2 text-center sm:mt-5">
           <p className="inline-flex items-center justify-center gap-1 font-['Inter'] text-[10px] tracking-[0.12em] text-[rgb(173_170_170/0.68)] uppercase">
             <ShieldCheck size={12} /> ENCRYPTED END-TO-END VIA VAULT-SECURE
             LAYER 7

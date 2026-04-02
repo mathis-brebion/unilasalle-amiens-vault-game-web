@@ -52,10 +52,10 @@ body {
   min-height: 100vh;
 }
 
-@keyframes auth-route-enter {
+@keyframes auth-content-enter {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(4px);
   }
 
   to {
@@ -64,12 +64,12 @@ body {
   }
 }
 
-.auth-route-enter {
-  animation: auth-route-enter 260ms ease;
+.auth-content-enter {
+  animation: auth-content-enter 180ms ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .auth-route-enter {
+  .auth-content-enter {
     animation: none;
   }
 }
