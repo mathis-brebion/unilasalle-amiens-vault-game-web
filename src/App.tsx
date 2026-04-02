@@ -1,8 +1,18 @@
+import { Navigate, Route, Routes } from "react-router-dom";
+import { AuthPageLayout } from "./components/auth/AuthPageLayout";
+import { SignInPage } from "./pages/SignInPage";
+import { SignUpPage } from "./pages/SignUpPage";
+
 function App() {
   return (
-    <>
-      <h1>Vault Game</h1>
-    </>
+    <Routes>
+      <Route path="/" element={<AuthPageLayout />}>
+        <Route index element={<Navigate to="sign-in" replace />} />
+        <Route path="sign-in" element={<SignInPage />} />
+        <Route path="sign-up" element={<SignUpPage />} />
+      </Route>
+      <Route path="*" element={<Navigate to="/sign-in" replace />} />
+    </Routes>
   );
 }
 
