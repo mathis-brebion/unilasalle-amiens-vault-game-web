@@ -56,13 +56,11 @@ export function SignUpPage() {
           htmlFor="terms"
           className="font-['Manrope'] text-[11px] leading-relaxed text-muted-foreground"
         >
-          I ACKNOWLEDGE THE TERMS OF THE{" "}
-          <em className="not-italic text-primary">VAULT GAME PROTOCOL</em> AND
-          CONSENT TO DATA SYNCHRONIZATION.
+          I ACKNOWLEDGE THE TERMS OF THE <em className="not-italic text-primary">VAULT GAME PROTOCOL</em> AND CONSENT TO DATA SYNCHRONIZATION.
         </Label>
       </div>
 
-      <Button type="submit" size="lg" className="mt-1 w-full">
+      <Button type="submit" size="lg" className="mt-1 w-full cursor-pointer">
         INITIATE REGISTRATION
       </Button>
     </form>

@@ -25,7 +25,7 @@ export function SignInPage() {
         }}
       />
 
-      <Button type="submit" size="lg" className="mt-1 w-full">
+      <Button type="submit" size="lg" className="mt-1 w-full cursor-pointer">
         INITIATE AUTHENTICATION
       </Button>
     </form>

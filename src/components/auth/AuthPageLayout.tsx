@@ -61,13 +61,13 @@ export const AuthPageLayout = () => {
             >
               <TabsTrigger
                 value="sign-in"
-                className="relative flex-1 rounded-none border-none py-5 font-['Space_Grotesk'] text-xs tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground data-active:text-primary data-active:after:absolute data-active:after:right-0 data-active:after:bottom-[-1px] data-active:after:left-0 data-active:after:h-0.5 data-active:after:bg-primary data-active:after:shadow-[0_0_8px_rgb(153_247_255)]"
+                className="relative flex-1 rounded-none border-none py-5 font-['Space_Grotesk'] text-xs tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground data-active:text-primary data-active:after:absolute data-active:after:right-0 data-active:after:-bottom-px data-active:after:left-0 data-active:after:h-0.5 data-active:after:bg-primary data-active:after:shadow-[0_0_8px_rgb(153_247_255)] cursor-pointer"
               >
                 LOGIN
               </TabsTrigger>
               <TabsTrigger
                 value="sign-up"
-                className="relative flex-1 rounded-none border-none py-5 font-['Space_Grotesk'] text-xs tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground data-active:text-primary data-active:after:absolute data-active:after:right-0 data-active:after:bottom-[-1px] data-active:after:left-0 data-active:after:h-0.5 data-active:after:bg-primary data-active:after:shadow-[0_0_8px_rgb(153_247_255)]"
+                className="relative flex-1 rounded-none border-none py-5 font-['Space_Grotesk'] text-xs tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground data-active:text-primary data-active:after:absolute data-active:after:right-0 data-active:after:-bottom-px data-active:after:left-0 data-active:after:h-0.5 data-active:after:bg-primary data-active:after:shadow-[0_0_8px_rgb(153_247_255)] cursor-pointer"
               >
                 SIGN UP
               </TabsTrigger>
