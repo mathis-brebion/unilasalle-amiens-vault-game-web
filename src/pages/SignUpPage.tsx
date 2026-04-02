@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { CircleUserRound, KeyRound, LockKeyholeOpen, Mail } from "lucide-react";
 import { AuthInputField } from "@/components/auth/AuthInputField";
 import { Button } from "@/components/ui/button";
@@ -5,8 +6,23 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
 export function SignUpPage() {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const passwordsDoNotMatch =
+    confirmPassword.length > 0 && password !== confirmPassword;
+
   return (
-    <form className="grid gap-5" onSubmit={(event) => event.preventDefault()}>
+    <form
+      className="grid gap-5"
+      onSubmit={(event) => {
+        event.preventDefault();
+
+        if (passwordsDoNotMatch) {
+          return;
+        }
+      }}
+    >
       <AuthInputField
         label="IDENTIFICATION TAG"
         icon={CircleUserRound}
@@ -36,6 +52,8 @@ export function SignUpPage() {
           placeholder: "********",
           required: true,
           minLength: 8,
+          value: password,
+          onChange: (event) => setPassword(event.target.value),
         }}
       />
 
@@ -47,16 +65,34 @@ export function SignUpPage() {
           placeholder: "********",
           required: true,
           minLength: 8,
+          value: confirmPassword,
+          onChange: (event) => setConfirmPassword(event.target.value),
+          "aria-invalid": passwordsDoNotMatch,
         }}
       />
 
+      {passwordsDoNotMatch ? (
+        <p
+          className="-mt-2 font-['Manrope'] text-[11px] text-destructive"
+          role="alert"
+        >
+          PASSWORD AND CONFIRMATION MUST MATCH.
+        </p>
+      ) : null}
+
       <div className="grid grid-cols-[auto_1fr] items-start gap-2 pt-1">
-        <Checkbox id="terms" required className="mt-0.5" />
+        <Checkbox
+          id="terms"
+          required
+          className="mt-0.5 cursor-pointer border-primary-foreground text-primary"
+        />
         <Label
           htmlFor="terms"
-          className="font-['Manrope'] text-[11px] leading-relaxed text-muted-foreground"
+          className="block font-['Manrope'] text-[11px] leading-relaxed text-muted-foreground"
         >
-          I ACKNOWLEDGE THE TERMS OF THE <em className="not-italic text-primary">VAULT GAME PROTOCOL</em> AND CONSENT TO DATA SYNCHRONIZATION.
+          I ACKNOWLEDGE THE TERMS OF THE{" "}
+          <em className="not-italic text-primary">VAULT GAME PROTOCOL</em> AND
+          CONSENT TO DATA SYNCHRONIZATION.
         </Label>
       </div>
 
