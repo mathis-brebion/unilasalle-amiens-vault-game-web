@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { ShieldCheck } from "lucide-react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import backgroundAuth from "@/assets/background-auth.png";
@@ -16,6 +17,17 @@ export const AuthPageLayout = () => {
   const activeTab = location.pathname.includes("sign-up")
     ? "sign-up"
     : "sign-in";
+  const [isContentVisible, setIsContentVisible] = useState(false);
+
+  useEffect(() => {
+    setIsContentVisible(false);
+
+    const frameId = window.requestAnimationFrame(() => {
+      setIsContentVisible(true);
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [location.pathname]);
 
   return (
     <main className="relative h-svh overflow-hidden bg-background text-foreground">
@@ -59,7 +71,9 @@ export const AuthPageLayout = () => {
             </Link>
           </nav>
 
-          <div className="auth-content-enter space-y-5 p-6 sm:p-5">
+          <div
+            className={`space-y-5 p-6 transition-all duration-200 ease-out motion-reduce:transition-none motion-reduce:transform-none sm:p-5 ${isContentVisible ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"}`}
+          >
             <Outlet />
           </div>
         </Card>

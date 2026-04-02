@@ -52,28 +52,6 @@ body {
   min-height: 100vh;
 }
 
-@keyframes auth-content-enter {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.auth-content-enter {
-  animation: auth-content-enter 180ms ease-out;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .auth-content-enter {
-    animation: none;
-  }
-}
-
 @theme inline {
   --font-heading: "Space Grotesk", sans-serif;
   --font-sans: "Manrope", sans-serif;
