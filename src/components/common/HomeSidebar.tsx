@@ -34,7 +34,7 @@ const MENU_ENTRIES: GameSidebarMenuEntry[] = [
   { id: "settings", label: "Settings", Icon: SlidersHorizontal },
 ];
 
-export function GameSidebarMenu({
+export function HomeSidebar({
   activeItem = "add-game",
   onItemSelect,
   userName = "System Entry",
