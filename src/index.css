@@ -106,3 +106,41 @@ body {
     @apply font-sans;
   }
 }
+
+@layer components {
+  .text-ui-label {
+    @apply font-sans text-[11px] tracking-[0.14em] uppercase;
+  }
+
+  .text-ui-kicker {
+    @apply font-heading text-[10px] tracking-[0.15em] uppercase;
+  }
+
+  .text-ui-meta {
+    @apply font-sans text-[10px] tracking-[0.12em] uppercase;
+  }
+
+  .text-ui-meta-compact {
+    @apply font-sans text-[9px] tracking-[0.16em] uppercase;
+  }
+
+  .surface-glass {
+    @apply border border-[rgb(153_247_255/0.14)] bg-[rgb(19_19_19/0.75)] backdrop-blur-xl;
+  }
+
+  .surface-control {
+    @apply border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)];
+  }
+
+  .surface-dashboard-card {
+    @apply border-[rgb(153_247_255/0.14)] bg-[rgb(26_25_25/0.86)];
+  }
+
+  .surface-dashboard-item {
+    @apply border border-[rgb(153_247_255/0.1)] bg-[rgb(19_19_19/0.84)];
+  }
+
+  .avatar-shell {
+    @apply bg-[rgb(19_19_19/0.95)];
+  }
+}
