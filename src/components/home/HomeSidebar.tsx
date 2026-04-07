@@ -92,7 +92,7 @@ export function HomeSidebar({
                       onClick={() => onItemSelect?.(id)}
                       aria-current={isActive ? "page" : undefined}
                       className={cn(
-                        "h-auto gap-3 rounded-lg px-3 py-2.5 font-['Manrope'] text-sm font-normal",
+                        "cursor-pointer h-auto gap-3 rounded-lg px-3 py-2.5 font-['Manrope'] text-sm font-normal",
                         "text-muted-foreground hover:bg-[rgb(153_247_255/0.08)] hover:text-foreground",
                         isActive &&
                           "bg-[linear-gradient(135deg,rgb(153_247_255/0.2)_0%,rgb(0_241_254/0.12)_100%)] text-primary",
