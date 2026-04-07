@@ -1,27 +1,26 @@
 import type { ReactNode } from "react";
-import { Bell, Search } from "lucide-react";
+import { Bell } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-type GameAppHeaderProps = {
+type HeaderProps = {
   eyebrow: string;
   title: string;
-  searchPlaceholder?: string;
+  centerContent?: ReactNode;
   profileInitials?: string;
   mobileNavigation?: ReactNode;
   className?: string;
 };
 
-export function GameAppHeader({
+export function Header({
   eyebrow,
   title,
-  searchPlaceholder = "Search...",
+  centerContent,
   profileInitials = "VG",
   mobileNavigation,
   className,
-}: GameAppHeaderProps) {
+}: HeaderProps) {
   return (
     <header
       className={cn(
@@ -40,20 +39,11 @@ export function GameAppHeader({
         </div>
         <div className="ml-auto flex w-full items-center gap-2 md:w-auto">
           {mobileNavigation}
-          <div className="relative min-w-0 flex-1 md:w-80 md:flex-none">
-            <Search
-              size={16}
-              className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-muted-foreground"
-            />
-            <Input
-              placeholder={searchPlaceholder}
-              className="h-10 border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)] pl-9"
-            />
-          </div>
+          {centerContent}
           <Button
             size="icon"
             variant="outline"
-            className="h-10 w-10 border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)]"
+            className="cursor-pointer h-10 w-10 border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)]"
             aria-label="Open notifications"
           >
             <Bell size={16} />
@@ -61,7 +51,7 @@ export function GameAppHeader({
           <Button
             size="icon"
             variant="outline"
-            className="h-10 w-10 border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)]"
+            className="cursor-pointer h-10 w-10 border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)]"
             aria-label="Open profile menu"
           >
             <Avatar size="sm" className="bg-[rgb(19_19_19/0.95)]">

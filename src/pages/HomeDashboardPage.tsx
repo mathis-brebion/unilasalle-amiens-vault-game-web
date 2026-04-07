@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { PanelLeft } from "lucide-react";
+import { PanelLeft, Search } from "lucide-react";
 import { HomeSidebar } from "@/components/home/HomeSidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GameAppHeader } from "@/components/common/Header";
+import { Header } from "@/components/common/Header";
+import { Input } from "@/components/ui/input";
 import {
   DashboardActivitySection,
   DashboardContinuePlayingSection,
@@ -51,10 +52,21 @@ export function HomeDashboardPage() {
         />
 
         <section className="flex min-w-0 flex-1 flex-col gap-4 lg:gap-6">
-          <GameAppHeader
+          <Header
             eyebrow="Home"
             title="Main Dashboard"
-            searchPlaceholder="Search games, genres, friends..."
+            centerContent={
+              <div className="relative min-w-0 flex-1 md:w-80 md:flex-none">
+                <Search
+                  size={16}
+                  className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-muted-foreground"
+                />
+                <Input
+                  placeholder="Search games, genres, friends..."
+                  className="h-10 border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)] pl-9"
+                />
+              </div>
+            }
             profileInitials="OP"
             mobileNavigation={
               <Sheet
