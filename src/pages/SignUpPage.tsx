@@ -1,107 +1,32 @@
 import { useState } from "react";
-import { CircleUserRound, KeyRound, LockKeyholeOpen, Mail } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { AuthInputField } from "@/components/auth/AuthInputField";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+import { useAuth } from "@/hooks/use-auth";
 
 export function SignUpPage() {
-  const navigate = useNavigate();
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
-  const passwordsDoNotMatch =
-    confirmPassword.length > 0 && password !== confirmPassword;
+  const { register } = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
     <form
       className="grid gap-5"
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault();
+        setIsSubmitting(true);
 
-        if (passwordsDoNotMatch) {
-          return;
+        try {
+          await register();
+        } finally {
+          setIsSubmitting(false);
         }
-
-        navigate("/dashboard");
       }}
     >
-      <AuthInputField
-        label="IDENTIFICATION TAG"
-        icon={CircleUserRound}
-        inputProps={{
-          type: "text",
-          placeholder: "ENTER USERNAME",
-          required: true,
-          minLength: 3,
-        }}
-      />
-
-      <AuthInputField
-        label="NEURAL EMAIL"
-        icon={Mail}
-        inputProps={{
-          type: "email",
-          placeholder: "NODE@NETWORK.COM",
-          required: true,
-        }}
-      />
-
-      <AuthInputField
-        label="ACCESS CIPHER"
-        icon={LockKeyholeOpen}
-        inputProps={{
-          type: "password",
-          placeholder: "********",
-          required: true,
-          minLength: 8,
-          value: password,
-          onChange: (event) => setPassword(event.target.value),
-        }}
-      />
-
-      <AuthInputField
-        label="CONFIRM CIPHER"
-        icon={KeyRound}
-        inputProps={{
-          type: "password",
-          placeholder: "********",
-          required: true,
-          minLength: 8,
-          value: confirmPassword,
-          onChange: (event) => setConfirmPassword(event.target.value),
-          "aria-invalid": passwordsDoNotMatch,
-        }}
-      />
-
-      {passwordsDoNotMatch ? (
-        <p
-          className="-mt-2 font-sans text-[11px] text-destructive"
-          role="alert"
-        >
-          PASSWORD AND CONFIRMATION MUST MATCH.
-        </p>
-      ) : null}
-
-      <div className="grid grid-cols-[auto_1fr] items-start gap-2 pt-1">
-        <Checkbox
-          id="terms"
-          required
-          className="mt-0.5 cursor-pointer border-primary-foreground text-primary"
-        />
-        <Label
-          htmlFor="terms"
-          className="block font-sans text-[11px] leading-relaxed text-muted-foreground"
-        >
-          I ACKNOWLEDGE THE TERMS OF THE{" "}
-          <em className="not-italic text-primary">VAULT GAME PROTOCOL</em> AND
-          CONSENT TO DATA SYNCHRONIZATION.
-        </Label>
-      </div>
+      <p className="font-sans text-sm leading-relaxed text-muted-foreground">
+        Create your account in Keycloak and come back authenticated with a valid
+        identity token.
+      </p>
 
       <Button type="submit" size="lg" className="mt-1 w-full cursor-pointer">
-        INITIATE REGISTRATION
+        {isSubmitting ? "REDIRECTING..." : "REGISTER WITH KEYCLOAK"}
       </Button>
     </form>
   );

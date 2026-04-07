@@ -24,6 +24,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Textarea } from "@/components/ui/textarea";
+import { useAuth } from "@/hooks/use-auth";
 import type { GameSidebarMenuItem } from "@/types/game-sidebar";
 
 const PLATFORM_OPTIONS = [
@@ -38,8 +39,17 @@ const PLATFORM_OPTIONS = [
 ] as const;
 
 export function AddGamePage() {
+  const {
+    user,
+    logout,
+    apiAvailability,
+    apiStatusMessage,
+    revalidateApiSession,
+  } = useAuth();
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
+  const displayName = user.username || "Operator_01";
+  const profileInitials = displayName.slice(0, 2).toUpperCase();
 
   const handleSidebarItemSelect = (item: GameSidebarMenuItem) => {
     void item;
@@ -65,7 +75,7 @@ export function AddGamePage() {
           className="hidden shrink-0 lg:flex"
           activeItem="add-game"
           onItemSelect={handleSidebarItemSelect}
-          userName="Operator_01"
+          userName={displayName}
           userStatus="Vault Sync Stable"
         />
 
@@ -73,7 +83,10 @@ export function AddGamePage() {
           <Header
             eyebrow="Library Operations"
             title="Add New Protocol"
-            profileInitials="OP"
+            profileInitials={profileInitials}
+            onLogout={() => {
+              void logout();
+            }}
             mobileNavigation={
               <Sheet
                 open={isMobileSidebarOpen}
@@ -104,13 +117,35 @@ export function AddGamePage() {
                     className="min-h-full max-w-none"
                     activeItem="add-game"
                     onItemSelect={handleSidebarItemSelect}
-                    userName="Operator_01"
+                    userName={displayName}
                     userStatus="Vault Sync Stable"
                   />
                 </SheetContent>
               </Sheet>
             }
           />
+
+          {apiAvailability === "unavailable" ? (
+            <Card className="border-destructive/40 bg-destructive/10">
+              <CardContent className="flex flex-wrap items-center justify-between gap-3 py-4">
+                <p className="text-sm text-destructive">
+                  Authentification Keycloak active, mais connexion API
+                  indisponible.
+                  {apiStatusMessage ? ` ${apiStatusMessage}` : ""}
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="cursor-pointer"
+                  onClick={() => {
+                    void revalidateApiSession();
+                  }}
+                >
+                  Retry API Check
+                </Button>
+              </CardContent>
+            </Card>
+          ) : null}
 
           <Card className="surface-dashboard-card">
             <CardHeader className="gap-2">
