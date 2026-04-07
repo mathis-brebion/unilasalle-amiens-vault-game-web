@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Bell, PanelLeft, Search } from "lucide-react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { PanelLeft } from "lucide-react";
 import { HomeSidebar } from "@/components/home/HomeSidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { GameAppHeader } from "@/components/common/Header";
 import {
   DashboardActivitySection,
   DashboardContinuePlayingSection,
@@ -52,83 +51,48 @@ export function HomeDashboardPage() {
         />
 
         <section className="flex min-w-0 flex-1 flex-col gap-4 lg:gap-6">
-          <header className="rounded-xl border border-[rgb(153_247_255/0.14)] bg-[rgb(19_19_19/0.75)] px-4 py-3 backdrop-blur-xl lg:px-6 lg:py-4">
-            <div className="flex flex-wrap items-center gap-3">
-              <div>
-                <p className="font-['Inter'] text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
-                  Home
-                </p>
-                <h1 className="font-['Space_Grotesk'] text-xl font-semibold text-foreground lg:text-2xl">
-                  Main Dashboard
-                </h1>
-              </div>
-              <div className="ml-auto flex w-full items-center gap-2 md:w-auto">
-                <Sheet
-                  open={isMobileSidebarOpen}
-                  onOpenChange={setIsMobileSidebarOpen}
-                >
-                  <SheetTrigger asChild>
-                    <Button
-                      size="icon"
-                      variant="outline"
-                      className="h-10 w-10 border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)] lg:hidden"
-                      aria-label="Open navigation"
-                    >
-                      <PanelLeft size={16} />
-                    </Button>
-                  </SheetTrigger>
-                  <SheetContent
-                    side="left"
-                    showCloseButton={false}
-                    className="w-84 border-[rgb(72_72_71/0.45)] bg-background p-2 sm:max-w-84"
+          <GameAppHeader
+            eyebrow="Home"
+            title="Main Dashboard"
+            searchPlaceholder="Search games, genres, friends..."
+            profileInitials="OP"
+            mobileNavigation={
+              <Sheet
+                open={isMobileSidebarOpen}
+                onOpenChange={setIsMobileSidebarOpen}
+              >
+                <SheetTrigger asChild>
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    className="h-10 w-10 border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)] lg:hidden"
+                    aria-label="Open navigation"
                   >
-                    <SheetHeader className="sr-only">
-                      <SheetTitle>Dashboard navigation</SheetTitle>
-                      <SheetDescription>
-                        Access dashboard sections and account settings.
-                      </SheetDescription>
-                    </SheetHeader>
-                    <HomeSidebar
-                      className="min-h-full max-w-none"
-                      activeItem={activeSidebarItem}
-                      onItemSelect={handleSidebarItemSelect}
-                      userName="Operator_01"
-                      userStatus="Vault Sync Stable"
-                    />
-                  </SheetContent>
-                </Sheet>
-                <div className="relative min-w-0 flex-1 md:w-80 md:flex-none">
-                  <Search
-                    size={16}
-                    className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-muted-foreground"
-                  />
-                  <Input
-                    placeholder="Search games, genres, friends..."
-                    className="h-10 border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)] pl-9"
-                  />
-                </div>
-                <Button
-                  size="icon"
-                  variant="outline"
-                  className="h-10 w-10 border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)]"
+                    <PanelLeft size={16} />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent
+                  side="left"
+                  showCloseButton={false}
+                  className="w-84 border-[rgb(72_72_71/0.45)] bg-background p-2 sm:max-w-84"
                 >
-                  <Bell size={16} />
-                </Button>
-                <Button
-                  size="icon"
-                  variant="outline"
-                  className="h-10 w-10 border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)]"
-                  aria-label="Open profile menu"
-                >
-                  <Avatar size="sm" className="bg-[rgb(19_19_19/0.95)]">
-                    <AvatarFallback className="bg-transparent font-['Inter'] text-[10px] text-primary">
-                      OP
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
-              </div>
-            </div>
-          </header>
+                  <SheetHeader className="sr-only">
+                    <SheetTitle>Dashboard navigation</SheetTitle>
+                    <SheetDescription>
+                      Access dashboard sections and account settings.
+                    </SheetDescription>
+                  </SheetHeader>
+                  <HomeSidebar
+                    className="min-h-full max-w-none"
+                    activeItem={activeSidebarItem}
+                    onItemSelect={handleSidebarItemSelect}
+                    userName="Operator_01"
+                    userStatus="Vault Sync Stable"
+                  />
+                </SheetContent>
+              </Sheet>
+            }
+          />
 
           <Card className="relative overflow-hidden border-[rgb(153_247_255/0.18)] bg-[linear-gradient(135deg,rgb(26_25_25/0.9)_0%,rgb(19_19_19/0.92)_60%,rgb(0_241_254/0.12)_100%)]">
             <div
