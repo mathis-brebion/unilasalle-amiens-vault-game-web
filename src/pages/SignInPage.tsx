@@ -1,10 +1,19 @@
 import { CircleUserRound, Lock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { AuthInputField } from "@/components/auth/AuthInputField";
 import { Button } from "@/components/ui/button";
 
 export function SignInPage() {
+  const navigate = useNavigate();
+
   return (
-    <form className="grid gap-5" onSubmit={(event) => event.preventDefault()}>
+    <form
+      className="grid gap-5"
+      onSubmit={(event) => {
+        event.preventDefault();
+        navigate("/dashboard");
+      }}
+    >
       <AuthInputField
         label="IDENTIFICATION TAG"
         icon={CircleUserRound}
