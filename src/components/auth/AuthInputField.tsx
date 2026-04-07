@@ -20,10 +20,7 @@ export function AuthInputField({
 
   return (
     <label className="grid gap-1">
-      <Label
-        htmlFor={inputId}
-        className="font-['Space_Grotesk'] text-[10px] tracking-[0.15em] text-muted-foreground uppercase"
-      >
+      <Label htmlFor={inputId} className="text-ui-kicker text-muted-foreground">
         {label}
       </Label>
 

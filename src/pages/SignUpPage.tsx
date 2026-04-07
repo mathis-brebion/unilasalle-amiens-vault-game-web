@@ -77,7 +77,7 @@ export function SignUpPage() {
 
       {passwordsDoNotMatch ? (
         <p
-          className="-mt-2 font-['Manrope'] text-[11px] text-destructive"
+          className="-mt-2 font-sans text-[11px] text-destructive"
           role="alert"
         >
           PASSWORD AND CONFIRMATION MUST MATCH.
@@ -92,7 +92,7 @@ export function SignUpPage() {
         />
         <Label
           htmlFor="terms"
-          className="block font-['Manrope'] text-[11px] leading-relaxed text-muted-foreground"
+          className="block font-sans text-[11px] leading-relaxed text-muted-foreground"
         >
           I ACKNOWLEDGE THE TERMS OF THE{" "}
           <em className="not-italic text-primary">VAULT GAME PROTOCOL</em> AND

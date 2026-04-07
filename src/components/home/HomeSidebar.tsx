@@ -65,14 +65,14 @@ export function HomeSidebar({
         aria-label="Primary navigation"
       >
         <SidebarHeader className="mb-2 space-y-2 border-b border-[rgb(72_72_71/0.35)] px-4 pt-4 pb-5">
-          <p className="font-['Space_Grotesk'] text-xs tracking-[0.22em] text-primary/90 uppercase">
+          <p className="font-heading text-xs tracking-[0.22em] text-primary/90 uppercase">
             The Curator
           </p>
           <div className="space-y-0.5">
-            <h2 className="font-['Space_Grotesk'] text-xl font-semibold tracking-[0.02em] text-foreground">
+            <h2 className="font-heading text-xl font-semibold tracking-[0.02em] text-foreground">
               Elite Library
             </h2>
-            <p className="font-['Inter'] text-[10px] tracking-[0.18em] text-muted-foreground uppercase">
+            <p className="text-ui-meta tracking-[0.18em] text-muted-foreground">
               Neon Sanctum
             </p>
           </div>
@@ -92,7 +92,7 @@ export function HomeSidebar({
                       onClick={() => onItemSelect?.(id)}
                       aria-current={isActive ? "page" : undefined}
                       className={cn(
-                        "cursor-pointer h-auto gap-3 rounded-lg px-3 py-2.5 font-['Manrope'] text-sm font-normal",
+                        "h-auto cursor-pointer gap-3 rounded-lg px-3 py-2.5 font-sans text-sm font-normal",
                         "text-muted-foreground hover:bg-[rgb(153_247_255/0.08)] hover:text-foreground",
                         isActive &&
                           "bg-[linear-gradient(135deg,rgb(153_247_255/0.2)_0%,rgb(0_241_254/0.12)_100%)] text-primary",
@@ -119,16 +119,16 @@ export function HomeSidebar({
 
         <SidebarFooter className="mt-8 border-t border-[rgb(72_72_71/0.35)] px-4 pt-4 pb-4">
           <div className="flex items-center gap-3 rounded-lg bg-[rgb(38_38_38/0.55)] px-3 py-2">
-            <Avatar size="sm" className="bg-[rgb(19_19_19/0.95)]">
-              <AvatarFallback className="bg-transparent font-['Inter'] text-[10px] text-primary">
+            <Avatar size="sm" className="avatar-shell">
+              <AvatarFallback className="text-ui-meta bg-transparent text-primary">
                 {getInitials(userName)}
               </AvatarFallback>
             </Avatar>
             <div className="min-w-0">
-              <p className="truncate font-['Manrope'] text-xs font-medium text-foreground">
+              <p className="truncate font-sans text-xs font-medium text-foreground">
                 {userName}
               </p>
-              <p className="truncate font-['Inter'] text-[10px] tracking-[0.12em] text-muted-foreground uppercase">
+              <p className="text-ui-meta truncate text-muted-foreground">
                 {userStatus}
               </p>
             </div>

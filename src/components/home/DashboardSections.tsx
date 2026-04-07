@@ -13,19 +13,15 @@ export function DashboardKpiGrid({ kpis }: { kpis: DashboardKpi[] }) {
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
       {kpis.map((kpi) => (
-        <Card
-          key={kpi.label}
-          size="sm"
-          className="border-[rgb(153_247_255/0.14)] bg-[rgb(26_25_25/0.86)]"
-        >
+        <Card key={kpi.label} size="sm" className="surface-dashboard-card">
           <CardHeader className="gap-2">
-            <p className="font-['Inter'] text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
+            <p className="text-ui-meta tracking-[0.14em] text-muted-foreground">
               {kpi.label}
             </p>
-            <CardTitle className="font-['Space_Grotesk'] text-3xl leading-none">
+            <CardTitle className="font-heading text-3xl leading-none">
               {kpi.value}
             </CardTitle>
-            <p className="font-['Manrope'] text-xs text-primary">{kpi.delta}</p>
+            <p className="font-sans text-xs text-primary">{kpi.delta}</p>
           </CardHeader>
         </Card>
       ))}
@@ -39,11 +35,9 @@ export function DashboardRecentlyPlayedSection({
   games: DashboardGameTile[];
 }) {
   return (
-    <Card className="border-[rgb(153_247_255/0.14)] bg-[rgb(26_25_25/0.86)]">
+    <Card className="surface-dashboard-card">
       <CardHeader>
-        <CardTitle className="font-['Space_Grotesk'] text-lg">
-          Recently Played
-        </CardTitle>
+        <CardTitle className="font-heading text-lg">Recently Played</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -60,14 +54,14 @@ export function DashboardRecentlyPlayedSection({
               />
               <div className="space-y-2 px-3 py-2.5">
                 <div className="flex items-start justify-between gap-2">
-                  <p className="font-['Space_Grotesk'] text-sm font-medium">
+                  <p className="font-heading text-sm font-medium">
                     {game.title}
                   </p>
-                  <span className="font-['Inter'] text-[10px] tracking-widest text-muted-foreground uppercase">
+                  <span className="text-ui-meta tracking-widest text-muted-foreground">
                     {game.progress}%
                   </span>
                 </div>
-                <p className="font-['Manrope'] text-xs text-muted-foreground">
+                <p className="font-sans text-xs text-muted-foreground">
                   {game.subtitle}
                 </p>
                 <Progress value={game.progress} className="h-1.5" />
@@ -86,11 +80,9 @@ export function DashboardContinuePlayingSection({
   games: DashboardGameTile[];
 }) {
   return (
-    <Card className="border-[rgb(153_247_255/0.14)] bg-[rgb(26_25_25/0.86)]">
+    <Card className="surface-dashboard-card">
       <CardHeader>
-        <CardTitle className="font-['Space_Grotesk'] text-lg">
-          Continue Playing
-        </CardTitle>
+        <CardTitle className="font-heading text-lg">Continue Playing</CardTitle>
       </CardHeader>
       <CardContent className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         {games.map((game) => (
@@ -106,10 +98,10 @@ export function DashboardContinuePlayingSection({
             />
             <div className="space-y-2 px-4 py-3">
               <div className="flex items-center justify-between gap-2">
-                <p className="font-['Space_Grotesk'] text-base font-medium">
+                <p className="font-heading text-base font-medium">
                   {game.title}
                 </p>
-                <span className="font-['Inter'] text-[10px] tracking-widest text-primary uppercase">
+                <span className="text-ui-meta tracking-widest text-primary">
                   {game.subtitle}
                 </span>
               </div>
@@ -117,7 +109,7 @@ export function DashboardContinuePlayingSection({
                 value={game.progress}
                 className="h-2 **:data-[slot=progress-indicator]:bg-[linear-gradient(90deg,rgb(153_247_255)_0%,rgb(0_241_254)_100%)]"
               />
-              <p className="font-['Manrope'] text-xs text-muted-foreground">
+              <p className="font-sans text-xs text-muted-foreground">
                 {game.progress}% campaign completed
               </p>
             </div>
@@ -134,9 +126,9 @@ export function DashboardActivitySection({
   activities: DashboardActivityEntry[];
 }) {
   return (
-    <Card className="border-[rgb(153_247_255/0.14)] bg-[rgb(26_25_25/0.86)]">
+    <Card className="surface-dashboard-card">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 font-['Space_Grotesk'] text-lg">
+        <CardTitle className="flex items-center gap-2 font-heading text-lg">
           <Flame size={16} className="text-primary" />
           Activity
         </CardTitle>
@@ -145,12 +137,10 @@ export function DashboardActivitySection({
         {activities.map((activity) => (
           <article
             key={`${activity.text}-${activity.when}`}
-            className="rounded-lg border border-[rgb(153_247_255/0.1)] bg-[rgb(19_19_19/0.84)] px-3 py-2.5"
+            className="surface-dashboard-item rounded-lg px-3 py-2.5"
           >
-            <p className="font-['Manrope'] text-xs text-foreground">
-              {activity.text}
-            </p>
-            <p className="mt-1 inline-flex items-center gap-1 font-['Inter'] text-[10px] tracking-widest text-muted-foreground uppercase">
+            <p className="font-sans text-xs text-foreground">{activity.text}</p>
+            <p className="text-ui-meta mt-1 inline-flex items-center gap-1 tracking-widest text-muted-foreground">
               <Clock3 size={11} />
               {activity.when}
             </p>
@@ -167,9 +157,9 @@ export function DashboardRecommendationsSection({
   recommendations: DashboardRecommendation[];
 }) {
   return (
-    <Card className="border-[rgb(153_247_255/0.14)] bg-[rgb(26_25_25/0.86)]">
+    <Card className="surface-dashboard-card">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 font-['Space_Grotesk'] text-lg">
+        <CardTitle className="flex items-center gap-2 font-heading text-lg">
           <Sparkles size={16} className="text-secondary" />
           Recommended For You
         </CardTitle>
@@ -178,17 +168,17 @@ export function DashboardRecommendationsSection({
         {recommendations.map((item) => (
           <article
             key={item.title}
-            className="group rounded-lg border border-[rgb(153_247_255/0.1)] bg-[rgb(19_19_19/0.85)] p-2.5 transition hover:border-[rgb(153_247_255/0.24)]"
+            className="surface-dashboard-item group rounded-lg p-2.5 transition hover:border-[rgb(153_247_255/0.24)]"
           >
             <div className="mb-2 flex h-14 items-center justify-center rounded-md bg-[linear-gradient(135deg,rgb(153_247_255/0.16)_0%,rgb(191_129_255/0.2)_100%)]">
               <Gamepad2 size={18} className="text-primary" />
             </div>
-            <p className="truncate font-['Space_Grotesk'] text-xs text-foreground">
+            <p className="truncate font-heading text-xs text-foreground">
               {item.title}
             </p>
             <Badge
               variant="outline"
-              className="mt-1 border-[rgb(153_247_255/0.18)] font-['Inter'] text-[9px] tracking-widest text-muted-foreground uppercase"
+              className="text-ui-meta-compact mt-1 border-[rgb(153_247_255/0.18)] tracking-widest text-muted-foreground"
             >
               {item.genre}
             </Badge>
@@ -201,16 +191,16 @@ export function DashboardRecommendationsSection({
 
 export function DashboardRankCard() {
   return (
-    <Card className="border-[rgb(153_247_255/0.14)] bg-[rgb(26_25_25/0.86)]">
+    <Card className="surface-dashboard-card">
       <CardContent className="py-5">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <p className="font-['Space_Grotesk'] text-base">Vault Rank</p>
-            <p className="font-['Manrope'] text-xs text-muted-foreground">
+            <p className="font-heading text-base">Vault Rank</p>
+            <p className="font-sans text-xs text-muted-foreground">
               Elite Curator Tier
             </p>
           </div>
-          <Badge className="gap-1 rounded-full bg-[rgb(153_247_255/0.15)] font-['Inter'] text-[10px] tracking-widest text-primary uppercase hover:bg-[rgb(153_247_255/0.15)]">
+          <Badge className="text-ui-meta gap-1 rounded-full bg-[rgb(153_247_255/0.15)] tracking-widest text-primary hover:bg-[rgb(153_247_255/0.15)]">
             <Trophy size={12} />
             Rank 07
           </Badge>

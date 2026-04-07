@@ -63,7 +63,7 @@ export function HomeDashboardPage() {
                 />
                 <Input
                   placeholder="Search games, genres, friends..."
-                  className="h-10 border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)] pl-9"
+                  className="surface-control h-10 pl-9"
                 />
               </div>
             }
@@ -77,7 +77,7 @@ export function HomeDashboardPage() {
                   <Button
                     size="icon"
                     variant="outline"
-                    className="h-10 w-10 border-[rgb(72_72_71/0.45)] bg-[rgb(38_38_38/0.5)] lg:hidden"
+                    className="surface-control h-10 w-10 lg:hidden"
                     aria-label="Open navigation"
                   >
                     <PanelLeft size={16} />
@@ -112,19 +112,17 @@ export function HomeDashboardPage() {
               aria-hidden="true"
             />
             <CardHeader className="gap-2">
-              <p className="font-['Inter'] text-[11px] tracking-[0.14em] text-primary uppercase">
-                Welcome back
-              </p>
-              <CardTitle className="font-['Space_Grotesk'] text-2xl lg:text-3xl">
+              <p className="text-ui-label text-primary">Welcome back</p>
+              <CardTitle className="font-heading text-2xl lg:text-3xl">
                 Operator_01
               </CardTitle>
-              <p className="max-w-2xl font-['Manrope'] text-sm text-muted-foreground lg:text-base">
+              <p className="max-w-2xl font-sans text-sm text-muted-foreground lg:text-base">
                 128 titles synchronized. Your next milestone is close: complete
                 one mission in Chrono Drift to hit a 7-day streak.
               </p>
             </CardHeader>
             <CardContent>
-              <Button className="h-11 cursor-pointer px-5 font-['Space_Grotesk'] tracking-[0.04em]">
+              <Button className="h-11 cursor-pointer px-5 font-heading tracking-[0.04em]">
                 Resume Last Session
               </Button>
             </CardContent>
