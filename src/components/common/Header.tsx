@@ -9,6 +9,7 @@ type HeaderProps = {
   title: string;
   centerContent?: ReactNode;
   profileInitials?: string;
+  onLogout?: () => void;
   mobileNavigation?: ReactNode;
   className?: string;
 };
@@ -18,6 +19,7 @@ export function Header({
   title,
   centerContent,
   profileInitials = "VG",
+  onLogout,
   mobileNavigation,
   className,
 }: HeaderProps) {
@@ -50,7 +52,8 @@ export function Header({
             size="icon"
             variant="outline"
             className="surface-control h-10 w-10 cursor-pointer"
-            aria-label="Open profile menu"
+            aria-label="Logout"
+            onClick={onLogout}
           >
             <Avatar size="sm" className="avatar-shell">
               <AvatarFallback className="text-ui-meta bg-transparent text-primary">

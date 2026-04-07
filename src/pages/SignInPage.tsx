@@ -1,41 +1,32 @@
-import { CircleUserRound, Lock } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { AuthInputField } from "@/components/auth/AuthInputField";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/use-auth";
 
 export function SignInPage() {
-  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
     <form
       className="grid gap-5"
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault();
-        navigate("/dashboard");
+        setIsSubmitting(true);
+
+        try {
+          await login();
+        } finally {
+          setIsSubmitting(false);
+        }
       }}
     >
-      <AuthInputField
-        label="IDENTIFICATION TAG"
-        icon={CircleUserRound}
-        inputProps={{
-          type: "text",
-          placeholder: "PLAYER_ONE",
-          required: true,
-        }}
-      />
-
-      <AuthInputField
-        label="ACCESS CIPHER"
-        icon={Lock}
-        inputProps={{
-          type: "password",
-          placeholder: "************",
-          required: true,
-        }}
-      />
+      <p className="font-sans text-sm leading-relaxed text-muted-foreground">
+        Authenticate with the secure Keycloak identity gateway to access your
+        synchronized vault.
+      </p>
 
       <Button type="submit" size="lg" className="mt-1 w-full cursor-pointer">
-        INITIATE AUTHENTICATION
+        {isSubmitting ? "REDIRECTING..." : "CONTINUE WITH KEYCLOAK"}
       </Button>
     </form>
   );

@@ -28,12 +28,22 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useAuth } from "@/hooks/use-auth";
 import type { GameSidebarMenuItem } from "@/types/game-sidebar";
 
 export function HomeDashboardPage() {
+  const {
+    user,
+    logout,
+    apiAvailability,
+    apiStatusMessage,
+    revalidateApiSession,
+  } = useAuth();
   const [activeSidebarItem, setActiveSidebarItem] =
     useState<GameSidebarMenuItem>("collection");
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const displayName = user.username || "Operator_01";
+  const profileInitials = displayName.slice(0, 2).toUpperCase();
 
   const handleSidebarItemSelect = (item: GameSidebarMenuItem) => {
     setActiveSidebarItem(item);
@@ -47,7 +57,7 @@ export function HomeDashboardPage() {
           className="hidden shrink-0 lg:flex"
           activeItem={activeSidebarItem}
           onItemSelect={handleSidebarItemSelect}
-          userName="Operator_01"
+          userName={displayName}
           userStatus="Vault Sync Stable"
         />
 
@@ -55,6 +65,10 @@ export function HomeDashboardPage() {
           <Header
             eyebrow="Home"
             title="Main Dashboard"
+            profileInitials={profileInitials}
+            onLogout={() => {
+              void logout();
+            }}
             centerContent={
               <div className="relative min-w-0 flex-1 md:w-80 md:flex-none">
                 <Search
@@ -67,7 +81,6 @@ export function HomeDashboardPage() {
                 />
               </div>
             }
-            profileInitials="OP"
             mobileNavigation={
               <Sheet
                 open={isMobileSidebarOpen}
@@ -98,13 +111,35 @@ export function HomeDashboardPage() {
                     className="min-h-full max-w-none"
                     activeItem={activeSidebarItem}
                     onItemSelect={handleSidebarItemSelect}
-                    userName="Operator_01"
+                    userName={displayName}
                     userStatus="Vault Sync Stable"
                   />
                 </SheetContent>
               </Sheet>
             }
           />
+
+          {apiAvailability === "unavailable" ? (
+            <Card className="border-destructive/40 bg-destructive/10">
+              <CardContent className="flex flex-wrap items-center justify-between gap-3 py-4">
+                <p className="text-sm text-destructive">
+                  Authentification Keycloak active, mais connexion API
+                  indisponible.
+                  {apiStatusMessage ? ` ${apiStatusMessage}` : ""}
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="cursor-pointer"
+                  onClick={() => {
+                    void revalidateApiSession();
+                  }}
+                >
+                  Retry API Check
+                </Button>
+              </CardContent>
+            </Card>
+          ) : null}
 
           <Card className="relative overflow-hidden border-primary/20 bg-[linear-gradient(135deg,rgb(26_25_25/0.9)_0%,rgb(19_19_19/0.92)_60%,rgb(0_241_254/0.12)_100%)]">
             <div
@@ -114,7 +149,7 @@ export function HomeDashboardPage() {
             <CardHeader className="gap-2">
               <p className="text-ui-label text-primary">Welcome back</p>
               <CardTitle className="font-heading text-2xl lg:text-3xl">
-                Operator_01
+                {displayName}
               </CardTitle>
               <p className="max-w-2xl font-sans text-sm text-muted-foreground lg:text-base">
                 128 titles synchronized. Your next milestone is close: complete
