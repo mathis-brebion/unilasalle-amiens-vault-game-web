@@ -86,7 +86,7 @@ export function HomeDashboardPage() {
                 <SheetContent
                   side="left"
                   showCloseButton={false}
-                  className="w-84 border-[rgb(72_72_71/0.45)] bg-background p-2 sm:max-w-84"
+                  className="w-84 border-border/45 bg-background p-2 sm:max-w-84"
                 >
                   <SheetHeader className="sr-only">
                     <SheetTitle>Dashboard navigation</SheetTitle>
@@ -106,7 +106,7 @@ export function HomeDashboardPage() {
             }
           />
 
-          <Card className="relative overflow-hidden border-[rgb(153_247_255/0.18)] bg-[linear-gradient(135deg,rgb(26_25_25/0.9)_0%,rgb(19_19_19/0.92)_60%,rgb(0_241_254/0.12)_100%)]">
+          <Card className="relative overflow-hidden border-primary/20 bg-[linear-gradient(135deg,rgb(26_25_25/0.9)_0%,rgb(19_19_19/0.92)_60%,rgb(0_241_254/0.12)_100%)]">
             <div
               className="pointer-events-none absolute -top-8 -right-8 h-44 w-44 rounded-full bg-primary/18 blur-3xl"
               aria-hidden="true"
