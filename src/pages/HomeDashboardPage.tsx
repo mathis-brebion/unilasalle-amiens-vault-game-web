@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { PanelLeft, Search } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { HomeSidebar } from "@/components/home/HomeSidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -32,22 +31,11 @@ import {
 import type { GameSidebarMenuItem } from "@/types/game-sidebar";
 
 export function HomeDashboardPage() {
-  const navigate = useNavigate();
   const [activeSidebarItem, setActiveSidebarItem] =
     useState<GameSidebarMenuItem>("collection");
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const handleSidebarItemSelect = (item: GameSidebarMenuItem) => {
-    if (item === "add-game") {
-      setIsMobileSidebarOpen(false);
-      navigate("/dashboard/add-game");
-      return;
-    }
-
-    if (item === "collection") {
-      navigate("/dashboard");
-    }
-
     setActiveSidebarItem(item);
     setIsMobileSidebarOpen(false);
   };

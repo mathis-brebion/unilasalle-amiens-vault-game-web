@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Bolt, PanelLeft, ShieldCheck } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/common/Header";
 import { HomeSidebar } from "@/components/home/HomeSidebar";
 import { Badge } from "@/components/ui/badge";
@@ -35,24 +34,14 @@ const PLATFORM_OPTIONS = [
 ] as const;
 
 export function AddGamePage() {
-  const navigate = useNavigate();
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([
     "pc",
     "deck",
   ]);
 
-  const handleSidebarItemSelect = (item: GameSidebarMenuItem) => {
+  const handleSidebarItemSelect = (_item: GameSidebarMenuItem) => {
     setIsMobileSidebarOpen(false);
-
-    if (item === "collection") {
-      navigate("/dashboard");
-      return;
-    }
-
-    if (item === "add-game") {
-      navigate("/dashboard/add-game");
-    }
   };
 
   const handlePlatformToggle = (platformId: string, checked: boolean) => {

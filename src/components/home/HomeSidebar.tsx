@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Grid2x2, PlusSquare, SlidersHorizontal, Sparkles } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 import type {
   GameSidebarMenuEntry,
   GameSidebarMenuProps,
@@ -29,6 +30,11 @@ const MENU_ENTRIES: GameSidebarMenuEntry[] = [
   { id: "settings", label: "Settings", Icon: SlidersHorizontal },
 ];
 
+const MENU_ROUTES: Partial<Record<GameSidebarMenuEntry["id"], string>> = {
+  collection: "/dashboard",
+  "add-game": "/dashboard/add-game",
+};
+
 const getInitials = (value: string) => {
   const initials = value
     .split(/\s+/)
@@ -47,6 +53,19 @@ export function HomeSidebar({
   userStatus = "Secure Interface Active",
   className,
 }: GameSidebarMenuProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleItemClick = (item: GameSidebarMenuEntry["id"]) => {
+    const targetRoute = MENU_ROUTES[item];
+
+    if (targetRoute && targetRoute !== location.pathname) {
+      navigate(targetRoute);
+    }
+
+    onItemSelect?.(item);
+  };
+
   return (
     <SidebarProvider
       style={
@@ -89,7 +108,7 @@ export function HomeSidebar({
                     <SidebarMenuButton
                       type="button"
                       isActive={isActive}
-                      onClick={() => onItemSelect?.(id)}
+                      onClick={() => handleItemClick(id)}
                       aria-current={isActive ? "page" : undefined}
                       className={cn(
                         "h-auto cursor-pointer gap-3 rounded-lg px-3 py-2.5 font-sans text-sm font-normal",
