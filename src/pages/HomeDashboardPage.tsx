@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Bell, PanelLeft, Search } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { HomeSidebar } from "@/components/common/HomeSidebar";
+import { HomeSidebar } from "@/components/home/HomeSidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
