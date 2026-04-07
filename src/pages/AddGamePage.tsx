@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Bolt, PanelLeft, ShieldCheck } from "lucide-react";
+import { Bolt, PanelLeft } from "lucide-react";
 import { Header } from "@/components/common/Header";
 import { HomeSidebar } from "@/components/home/HomeSidebar";
 import { Badge } from "@/components/ui/badge";
@@ -27,20 +27,22 @@ import { Textarea } from "@/components/ui/textarea";
 import type { GameSidebarMenuItem } from "@/types/game-sidebar";
 
 const PLATFORM_OPTIONS = [
-  { id: "pc", label: "PC Station" },
-  { id: "deck", label: "Neural Deck" },
-  { id: "console", label: "Core Link" },
-  { id: "mobile", label: "Mobile HUD" },
+  { id: "steam", label: "Steam" },
+  { id: "epic-games", label: "Epic Games" },
+  { id: "gog", label: "GOG" },
+  { id: "steam-deck", label: "Steam Deck" },
+  { id: "playstation", label: "PlayStation" },
+  { id: "xbox", label: "XBOX" },
+  { id: "android", label: "Android" },
+  { id: "ios", label: "iOS" },
 ] as const;
 
 export function AddGamePage() {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([
-    "pc",
-    "deck",
-  ]);
+  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
 
-  const handleSidebarItemSelect = (_item: GameSidebarMenuItem) => {
+  const handleSidebarItemSelect = (item: GameSidebarMenuItem) => {
+    void item;
     setIsMobileSidebarOpen(false);
   };
 
@@ -199,7 +201,7 @@ export function AddGamePage() {
                   </div>
 
                   <div className="space-y-3">
-                    <Label>Neural interface / platforms</Label>
+                    <Label>Platforms</Label>
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                       {PLATFORM_OPTIONS.map((platform) => {
                         const isChecked = selectedPlatforms.includes(
@@ -221,7 +223,7 @@ export function AddGamePage() {
                               onCheckedChange={(checked) =>
                                 handlePlatformToggle(
                                   platform.id,
-                                  Boolean(checked),
+                                  checked === true,
                                 )
                               }
                               className="surface-control"
@@ -233,13 +235,7 @@ export function AddGamePage() {
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2">
-                    <Button
-                      variant="outline"
-                      className="surface-control h-10 px-4"
-                    >
-                      Save Draft
-                    </Button>
-                    <Button className="h-10 px-4 font-heading tracking-[0.04em]">
+                    <Button className="h-10 px-4 font-heading tracking-[0.04em] cursor-pointer">
                       <Bolt size={16} />
                       Initiate Sequencing
                     </Button>
@@ -251,29 +247,11 @@ export function AddGamePage() {
             <Card className="surface-dashboard-card">
               <CardHeader>
                 <CardTitle className="font-heading text-lg">
-                  Transmission Status
+                  Selected Platforms
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="surface-dashboard-item rounded-lg px-4 py-3">
-                  <p className="text-ui-label text-muted-foreground">Latency</p>
-                  <p className="font-heading text-2xl text-primary">0.02 ms</p>
-                </div>
-
-                <div className="surface-dashboard-item rounded-lg px-4 py-3">
-                  <p className="text-ui-label text-muted-foreground">
-                    Security
-                  </p>
-                  <div className="mt-1 flex items-center gap-2 text-sm text-foreground">
-                    <ShieldCheck size={16} className="text-primary" />
-                    <span>Secure interface active</span>
-                  </div>
-                </div>
-
                 <div className="space-y-2">
-                  <p className="text-ui-label text-muted-foreground">
-                    Selected platforms
-                  </p>
                   <div className="flex flex-wrap gap-2">
                     {selectedPlatforms.length > 0 ? (
                       selectedPlatforms.map((platformId) => {
