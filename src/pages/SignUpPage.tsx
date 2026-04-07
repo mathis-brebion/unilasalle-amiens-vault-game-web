@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { CircleUserRound, KeyRound, LockKeyholeOpen, Mail } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { AuthInputField } from "@/components/auth/AuthInputField";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
 export function SignUpPage() {
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -21,6 +23,8 @@ export function SignUpPage() {
         if (passwordsDoNotMatch) {
           return;
         }
+
+        navigate("/dashboard");
       }}
     >
       <AuthInputField

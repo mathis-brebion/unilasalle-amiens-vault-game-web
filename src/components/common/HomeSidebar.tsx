@@ -1,15 +1,10 @@
 import { cn } from "@/lib/utils";
-import {
-  Grid2x2,
-  PlusSquare,
-  SlidersHorizontal,
-  Sparkles,
-  UserCircle2,
-} from "lucide-react";
+import { Grid2x2, PlusSquare, SlidersHorizontal, Sparkles } from "lucide-react";
 import type {
   GameSidebarMenuEntry,
   GameSidebarMenuProps,
 } from "@/types/game-sidebar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Sidebar,
   SidebarContent,
@@ -33,6 +28,17 @@ const MENU_ENTRIES: GameSidebarMenuEntry[] = [
   { id: "add-game", label: "Add Game", Icon: PlusSquare },
   { id: "settings", label: "Settings", Icon: SlidersHorizontal },
 ];
+
+const getInitials = (value: string) => {
+  const initials = value
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0]?.toUpperCase() ?? "")
+    .join("");
+
+  return initials || "VG";
+};
 
 export function HomeSidebar({
   activeItem = "add-game",
@@ -113,11 +119,11 @@ export function HomeSidebar({
 
         <SidebarFooter className="mt-8 border-t border-[rgb(72_72_71/0.35)] px-4 pt-4 pb-4">
           <div className="flex items-center gap-3 rounded-lg bg-[rgb(38_38_38/0.55)] px-3 py-2">
-            <UserCircle2
-              size={20}
-              className="text-primary"
-              aria-hidden="true"
-            />
+            <Avatar size="sm" className="bg-[rgb(19_19_19/0.95)]">
+              <AvatarFallback className="bg-transparent font-['Inter'] text-[10px] text-primary">
+                {getInitials(userName)}
+              </AvatarFallback>
+            </Avatar>
             <div className="min-w-0">
               <p className="truncate font-['Manrope'] text-xs font-medium text-foreground">
                 {userName}
