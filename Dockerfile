@@ -3,6 +3,18 @@
 FROM oven/bun:1.2.8-alpine AS build
 WORKDIR /app
 
+# Build arguments for Vite environment variables
+ARG VITE_API_BASE_URL
+ARG VITE_KEYCLOAK_URL
+ARG VITE_KEYCLOAK_REALM
+ARG VITE_KEYCLOAK_CLIENT_ID
+
+# Make build args available as environment variables during build
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+ENV VITE_KEYCLOAK_URL=$VITE_KEYCLOAK_URL
+ENV VITE_KEYCLOAK_REALM=$VITE_KEYCLOAK_REALM
+ENV VITE_KEYCLOAK_CLIENT_ID=$VITE_KEYCLOAK_CLIENT_ID
+
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 

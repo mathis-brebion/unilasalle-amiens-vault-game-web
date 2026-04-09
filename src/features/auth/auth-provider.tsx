@@ -176,7 +176,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
    */
   const login = useCallback(async () => {
     await keycloakClient.login({
-      redirectUri: `${window.location.origin}/dashboard`,
+      redirectUri: window.location.href,
     });
   }, []);
 
@@ -187,7 +187,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
    */
   const register = useCallback(async () => {
     await keycloakClient.register({
-      redirectUri: `${window.location.origin}/dashboard`,
+      redirectUri: window.location.href,
     });
   }, []);
 
@@ -198,7 +198,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
    */
   const logout = useCallback(async () => {
     await keycloakClient.logout({
-      redirectUri: `${window.location.origin}/sign-in`,
+      redirectUri: `${window.location.origin}/`,
     });
   }, []);
 
