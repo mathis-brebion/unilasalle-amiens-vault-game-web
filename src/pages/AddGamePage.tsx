@@ -40,7 +40,6 @@ const PLATFORM_OPTIONS = [
 
 export function AddGamePage() {
   const {
-    user,
     logout,
     apiAvailability,
     apiStatusMessage,
@@ -48,9 +47,6 @@ export function AddGamePage() {
   } = useAuth();
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
-  const displayName = user.username || "Operator_01";
-  const profileInitials = displayName.slice(0, 2).toUpperCase();
-
   const handleSidebarItemSelect = (item: GameSidebarMenuItem) => {
     void item;
     setIsMobileSidebarOpen(false);
@@ -75,15 +71,12 @@ export function AddGamePage() {
           className="hidden shrink-0 lg:flex"
           activeItem="add-game"
           onItemSelect={handleSidebarItemSelect}
-          userName={displayName}
-          userStatus="Vault Sync Stable"
         />
 
         <section className="flex min-w-0 flex-1 flex-col gap-4 lg:gap-6">
           <Header
             eyebrow="Library Operations"
             title="Add New Protocol"
-            profileInitials={profileInitials}
             onLogout={() => {
               void logout();
             }}
@@ -117,8 +110,6 @@ export function AddGamePage() {
                     className="min-h-full max-w-none"
                     activeItem="add-game"
                     onItemSelect={handleSidebarItemSelect}
-                    userName={displayName}
-                    userStatus="Vault Sync Stable"
                   />
                 </SheetContent>
               </Sheet>

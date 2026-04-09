@@ -15,7 +15,5 @@ export type GameSidebarMenuEntry = {
 export type GameSidebarMenuProps = {
   activeItem?: GameSidebarMenuItem;
   onItemSelect?: (item: GameSidebarMenuItem) => void;
-  userName?: string;
-  userStatus?: string;
   className?: string;
 };

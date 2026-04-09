@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
-import { Bell } from "lucide-react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Bell, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -8,7 +7,6 @@ type HeaderProps = {
   eyebrow: string;
   title: string;
   centerContent?: ReactNode;
-  profileInitials?: string;
   onLogout?: () => void;
   mobileNavigation?: ReactNode;
   className?: string;
@@ -18,7 +16,6 @@ export function Header({
   eyebrow,
   title,
   centerContent,
-  profileInitials = "VG",
   onLogout,
   mobileNavigation,
   className,
@@ -55,11 +52,7 @@ export function Header({
             aria-label="Logout"
             onClick={onLogout}
           >
-            <Avatar size="sm" className="avatar-shell">
-              <AvatarFallback className="text-ui-meta bg-transparent text-primary">
-                {profileInitials}
-              </AvatarFallback>
-            </Avatar>
+            <LogOut size={16} />
           </Button>
         </div>
       </div>
