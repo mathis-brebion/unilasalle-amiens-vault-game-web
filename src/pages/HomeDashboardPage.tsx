@@ -6,20 +6,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Header } from "@/components/common/Header";
 import { Input } from "@/components/ui/input";
 import {
-  DashboardActivitySection,
-  DashboardContinuePlayingSection,
-  DashboardKpiGrid,
-  DashboardRankCard,
+  type OwnedGame,
   DashboardRecentlyPlayedSection,
-  DashboardRecommendationsSection,
 } from "@/components/home/DashboardSections";
-import {
-  continuePlayingGames,
-  dashboardActivities,
-  dashboardKpis,
-  dashboardRecommendations,
-  recentlyPlayedGames,
-} from "@/components/home/dashboard-data";
 import {
   Sheet,
   SheetContent,
@@ -43,7 +32,7 @@ export function HomeDashboardPage() {
     useState<GameSidebarMenuItem>("collection");
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const displayName = user.username || "Operator_01";
-  const profileInitials = displayName.slice(0, 2).toUpperCase();
+  const ownedGames: OwnedGame[] = [];
 
   const handleSidebarItemSelect = (item: GameSidebarMenuItem) => {
     setActiveSidebarItem(item);
@@ -57,15 +46,12 @@ export function HomeDashboardPage() {
           className="hidden shrink-0 lg:flex"
           activeItem={activeSidebarItem}
           onItemSelect={handleSidebarItemSelect}
-          userName={displayName}
-          userStatus="Vault Sync Stable"
         />
 
         <section className="flex min-w-0 flex-1 flex-col gap-4 lg:gap-6">
           <Header
             eyebrow="Home"
             title="Main Dashboard"
-            profileInitials={profileInitials}
             onLogout={() => {
               void logout();
             }}
@@ -111,8 +97,6 @@ export function HomeDashboardPage() {
                     className="min-h-full max-w-none"
                     activeItem={activeSidebarItem}
                     onItemSelect={handleSidebarItemSelect}
-                    userName={displayName}
-                    userStatus="Vault Sync Stable"
                   />
                 </SheetContent>
               </Sheet>
@@ -151,34 +135,11 @@ export function HomeDashboardPage() {
               <CardTitle className="font-heading text-2xl lg:text-3xl">
                 {displayName}
               </CardTitle>
-              <p className="max-w-2xl font-sans text-sm text-muted-foreground lg:text-base">
-                128 titles synchronized. Your next milestone is close: complete
-                one mission in Chrono Drift to hit a 7-day streak.
-              </p>
             </CardHeader>
-            <CardContent>
-              <Button className="h-11 cursor-pointer px-5 font-heading tracking-[0.04em]">
-                Resume Last Session
-              </Button>
-            </CardContent>
+            <CardContent />
           </Card>
 
-          <DashboardKpiGrid kpis={dashboardKpis} />
-
-          <div className="grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-            <div className="space-y-4">
-              <DashboardRecentlyPlayedSection games={recentlyPlayedGames} />
-              <DashboardContinuePlayingSection games={continuePlayingGames} />
-            </div>
-
-            <div className="space-y-4">
-              <DashboardActivitySection activities={dashboardActivities} />
-              <DashboardRecommendationsSection
-                recommendations={dashboardRecommendations}
-              />
-              <DashboardRankCard />
-            </div>
-          </div>
+          <DashboardRecentlyPlayedSection games={ownedGames} />
         </section>
       </div>
     </main>

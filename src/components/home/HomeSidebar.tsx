@@ -5,11 +5,9 @@ import type {
   GameSidebarMenuEntry,
   GameSidebarMenuProps,
 } from "@/types/game-sidebar";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarHeader,
   SidebarMenu,
@@ -35,22 +33,9 @@ const MENU_ROUTES: Partial<Record<GameSidebarMenuEntry["id"], string>> = {
   "add-game": "/dashboard/add-game",
 };
 
-const getInitials = (value: string) => {
-  const initials = value
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((word) => word[0]?.toUpperCase() ?? "")
-    .join("");
-
-  return initials || "VG";
-};
-
 export function HomeSidebar({
   activeItem = "add-game",
   onItemSelect,
-  userName = "System Entry",
-  userStatus = "Secure Interface Active",
   className,
 }: GameSidebarMenuProps) {
   const navigate = useNavigate();
@@ -136,23 +121,6 @@ export function HomeSidebar({
           </SidebarGroup>
         </SidebarContent>
 
-        <SidebarFooter className="mt-8 border-t border-[rgb(72_72_71/0.35)] px-4 pt-4 pb-4">
-          <div className="flex items-center gap-3 rounded-lg bg-[rgb(38_38_38/0.55)] px-3 py-2">
-            <Avatar size="sm" className="avatar-shell">
-              <AvatarFallback className="text-ui-meta bg-transparent text-primary">
-                {getInitials(userName)}
-              </AvatarFallback>
-            </Avatar>
-            <div className="min-w-0">
-              <p className="truncate font-sans text-xs font-medium text-foreground">
-                {userName}
-              </p>
-              <p className="text-ui-meta truncate text-muted-foreground">
-                {userStatus}
-              </p>
-            </div>
-          </div>
-        </SidebarFooter>
       </Sidebar>
     </SidebarProvider>
   );
