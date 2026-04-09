@@ -16,6 +16,7 @@ import {
   initializeKeycloakSession,
   keycloakClient,
 } from "@/features/auth/keycloak-client";
+import { authConfig } from "@/lib/auth-config";
 import type { ApiAvailabilityStatus, AuthUser } from "@/types/auth-types";
 
 const emptyUser: AuthUser = {
@@ -198,7 +199,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
    */
   const logout = useCallback(async () => {
     await keycloakClient.logout({
-      redirectUri: `${window.location.origin}/`,
+      redirectUri:
+        authConfig.keycloakLogoutRedirectUri ?? window.location.origin,
     });
   }, []);
 
